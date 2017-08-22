@@ -1,5 +1,7 @@
 # HoboNet - Relation Classification
 Convolution neural network for relation classification between two given entities
+**Test accuracy: 80.06%**
+**F1 score: 0.7745**
 
 #### Step 1:
 Prepare train.txt and text.txt run preprocess.py:
@@ -8,8 +10,10 @@ python preprocess.py
 ```
 
 #### Step 2:
-To get the vector representation of all the words, and then save them as a pickle:
+To get the vector representation of all the words, and then save them as a pickle.
+
 You will need the embeddings we used: https://www.cs.york.ac.uk/nlp/extvec/wiki_extvec.gz
+
 Download the .gz file and place it in a folder called 'embeddings'
 ```
 python prepare_data.py
