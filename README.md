@@ -30,7 +30,7 @@ python test.py
 ```
 It will display the accuracy and the F1 score on the test dataset
 
-## Dependencies:
+### Dependencies:
 ```
 NumPy
 Keras
@@ -39,3 +39,9 @@ gzip
 
 Use python2
 ```
+
+## References: 
+
+- Pengda Qin, Weiran Xu, Jun Guo, An empirical convolutional neural network approach for semantic relation classification, Neurocomputing, Volume 190, 2016, Pages 1-9, ISSN 0925-2312, http://dx.doi.org/10.1016/j.neucom.2015.12.091
+- Ngoc Thang Vu, Heike Adel, Pankaj Gupta, Hinrich Schütze, Combining Recurrent and Convolutional Neural Networks for Relation Classification, arXiv:1605.07333 [cs.CL]
+- Cicero Nogueira dos Santos, Bing Xiang, Bowen Zhou, Classifying Relations by Ranking with Convolutional Neural Networks,  	arXiv:1504.06580 [cs.CL]
