@@ -1,6 +1,8 @@
 # HoboNet - Relation Classification
 Convolution neural network for relation classification between two given entities
+
 **Test accuracy: 80.06%**
+
 **F1 score: 0.7745**
 
 #### Step 1:
