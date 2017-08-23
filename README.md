@@ -3,7 +3,9 @@ Convolution neural network for classification of semantic relationship between t
 
 **Test accuracy: 80.06%**
 
-**F1 score: 0.7745**
+**F1 score (including Other): 77.45%**
+
+**F1 score (excluding Other): 84.18%**
 
 #### Step 1:
 Prepare train.txt and text.txt run preprocess.py:
