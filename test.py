@@ -12,7 +12,8 @@ from keras.layers import Embedding
 from keras.layers import Convolution1D, GlobalMaxPooling1D, MaxPooling1D
 from keras import regularizers
 
-model_file = 'checkpoints/HoboNet_.17-1.39-0.63.hdf5'
+model_file = 'model/HoboNet_0.8060_0.7745.model'
+result_file = 'results/HoboNet_result.txt'
 
 batch_size = 64
 nb_filter = 100
@@ -21,6 +22,16 @@ hidden_dims = 100
 nb_epoch = 30
 reg_rate = 1e-4
 
+label_dict = {'Other':0, 
+              'Message-Topic(e1,e2)':1, 'Message-Topic(e2,e1)':2, 
+              'Product-Producer(e1,e2)':3, 'Product-Producer(e2,e1)':4, 
+              'Instrument-Agency(e1,e2)':5, 'Instrument-Agency(e2,e1)':6, 
+              'Entity-Destination(e1,e2)':7, 'Entity-Destination(e2,e1)':8,
+              'Cause-Effect(e1,e2)':9, 'Cause-Effect(e2,e1)':10,
+              'Component-Whole(e1,e2)':11, 'Component-Whole(e2,e1)':12,  
+              'Entity-Origin(e1,e2)':13, 'Entity-Origin(e2,e1)':14,
+              'Member-Collection(e1,e2)':15, 'Member-Collection(e2,e1)':16,
+              'Content-Container(e1,e2)':17, 'Content-Container(e2,e1)':18}
 
 def getPrecision(pred_test, yTest, targetLabel):
     targetLabelCount = 0
@@ -118,6 +129,12 @@ model.load_weights(model_file)
 
 pred_test = predict_classes(model.predict([leftTest, rightTest], verbose=False))
 
+with open(result_file, 'w') as out_file:
+	for i in range(len(pred_test)):
+		for key in label_dict:
+			if label_dict[key] == pred_test[i]:
+				out_file.write(str(i+1) + '\t' + key + '\n')
+
 dctLabels = np.sum(pred_test)
 totalDCTLabels = np.sum(yTest)
 
@@ -135,3 +152,5 @@ for targetLabel in xrange(1, max(yTest)):
     
 macroF1 = f1Sum / float(f1Count)    
 print "Non-other Macro-Averaged F1: %.4f\n" % (macroF1)
+
+print("\nResults stored in " + result_file)

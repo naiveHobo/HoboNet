@@ -1,8 +1,6 @@
 import string
 
-nlp = spacy.load('en')
-
-files = ['./SemEval2010_task8_all_data/SemEval2010_task8_training/TRAIN_FILE.TXT', './SemEval2010_task8_all_data/SemEval2010_task8_testing_keys/TEST_FILE_FULL.TXT']
+files = ['./dataset/train.txt', './dataset/test.txt']
 pfiles = ['./files/train.txt', './files/test.txt']
 
 for k in range(len(files)):
@@ -19,7 +17,7 @@ for k in range(len(files)):
 						if sentence[ch] == '>' and sentence[ch+1] != ' ':
 							sentence = sentence[:ch+1] + ' ' + sentence[ch+1:]
 
-					label = data[i+1][:len(data[i+1])-2]
+					label = data[i+1].strip()
 					tokens = sentence.strip().split()
 
 					for j in range(len(tokens)):						

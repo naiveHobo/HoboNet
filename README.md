@@ -1,5 +1,5 @@
 # HoboNet - Relation Classification
-Convolution neural network for relation classification between two given entities
+Convolution neural network for classification of semantic relationship between two given entities
 
 **Test accuracy: 80.06%**
 
@@ -35,6 +35,13 @@ To view the results of the above step:
 python test.py
 ```
 It will display the accuracy and the F1 score on the test dataset
+
+#### Step 5:
+To use the official SemEval2010-Task8 Scorer:
+```
+perl semeval2010_task8_scorer-v1.2.pl results/HoboNet_result.txt test_key.txt > result_score.txt
+```
+This will create result_score.txt file that contains the official scores and confusion matrix for this task
 
 #### Dependencies:
 ```
