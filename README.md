@@ -43,7 +43,7 @@ To use the official SemEval2010-Task8 Scorer:
 ```
 perl scorer/semeval2010_task8_scorer-v1.2.pl results/HoboNet_result.txt scorer/test_key.txt > scorer/result_scores.txt
 ```
-This will create result_score.txt file that contains the official scores and confusion matrix for this task
+This will create result_scores.txt file that contains the official scores and confusion matrix for this task
 
 #### Dependencies:
 ```
