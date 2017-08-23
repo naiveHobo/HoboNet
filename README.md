@@ -41,7 +41,7 @@ It will display the accuracy and the F1 score on the test dataset
 #### Step 5:
 To use the official SemEval2010-Task8 Scorer:
 ```
-perl semeval2010_task8_scorer-v1.2.pl results/HoboNet_result.txt test_key.txt > result_score.txt
+perl scorer/semeval2010_task8_scorer-v1.2.pl results/HoboNet_result.txt scorer/test_key.txt > scorer/result_scores.txt
 ```
 This will create result_score.txt file that contains the official scores and confusion matrix for this task
 
