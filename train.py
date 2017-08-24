@@ -66,20 +66,22 @@ output_left3 = Convolution1D(filters=nb_filter,
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_left)
+output_left3 = GlobalMaxPooling1D()(output_left3)
 output_left4 = Convolution1D(filters=nb_filter,
                         kernel_size=filter_length[1],
                         padding='same',
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_left)
+output_left4 = GlobalMaxPooling1D()(output_left4)
 output_left5 = Convolution1D(filters=nb_filter,
                         kernel_size=filter_length[2],
                         padding='same',
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_left)
+output_left5 = GlobalMaxPooling1D()(output_left5)
 output_left = concatenate([output_left3, output_left4, output_left5])
-output_left = GlobalMaxPooling1D()(output_left)
 
 words_input_right = Input(shape=(max_sentence_len,), dtype='int32', name='words_input_right')
 words_right = Embedding(embeddings.shape[0], embeddings.shape[1], weights=[embeddings], trainable=False)(words_input_right)
@@ -89,20 +91,22 @@ output_right3 = Convolution1D(filters=nb_filter,
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_right)
+output_right3 = GlobalMaxPooling1D()(output_right3)
 output_right4 = Convolution1D(filters=nb_filter,
                         kernel_size=filter_length[1],
                         padding='same',
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_right)
+output_right4 = GlobalMaxPooling1D()(output_right4)
 output_right5 = Convolution1D(filters=nb_filter,
                         kernel_size=filter_length[2],
                         padding='same',
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_right)
+output_right5 = GlobalMaxPooling1D()(output_right5)
 output_right = concatenate([output_right3, output_right4, output_right5])
-output_right = GlobalMaxPooling1D()(output_right)
 
 output = concatenate([output_left, output_right])
 

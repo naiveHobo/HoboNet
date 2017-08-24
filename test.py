@@ -12,8 +12,8 @@ from keras.layers import Embedding
 from keras.layers import Convolution1D, GlobalMaxPooling1D, MaxPooling1D
 from keras import regularizers
 
-model_file = 'model/HoboNet_0.8060_0.7745.model'
-result_file = 'results/HoboNet_result.txt'
+model_file = 'model/HoboNet_.17-1.37-0.62.hdf5'
+result_file = 'results/HoboNet_result1.txt'
 
 batch_size = 64
 nb_filter = 100
@@ -78,20 +78,22 @@ output_left3 = Convolution1D(filters=nb_filter,
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_left)
+output_left3 = GlobalMaxPooling1D()(output_left3)
 output_left4 = Convolution1D(filters=nb_filter,
                         kernel_size=filter_length[1],
                         padding='same',
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_left)
+output_left4 = GlobalMaxPooling1D()(output_left4)
 output_left5 = Convolution1D(filters=nb_filter,
                         kernel_size=filter_length[2],
                         padding='same',
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_left)
+output_left5 = GlobalMaxPooling1D()(output_left5)
 output_left = concatenate([output_left3, output_left4, output_left5])
-output_left = GlobalMaxPooling1D()(output_left)
 
 words_input_right = Input(shape=(max_sentence_len,), dtype='int32', name='words_input_right')
 words_right = Embedding(embeddings.shape[0], embeddings.shape[1], weights=[embeddings], trainable=False)(words_input_right)
@@ -101,20 +103,22 @@ output_right3 = Convolution1D(filters=nb_filter,
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_right)
+output_right3 = GlobalMaxPooling1D()(output_right3)
 output_right4 = Convolution1D(filters=nb_filter,
                         kernel_size=filter_length[1],
                         padding='same',
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_right)
+output_right4 = GlobalMaxPooling1D()(output_right4)
 output_right5 = Convolution1D(filters=nb_filter,
                         kernel_size=filter_length[2],
                         padding='same',
                         activation='relu',
                         strides=1,
                         kernel_regularizer=regularizers.l2(reg_rate))(words_right)
+output_right5 = GlobalMaxPooling1D()(output_right5)
 output_right = concatenate([output_right3, output_right4, output_right5])
-output_right = GlobalMaxPooling1D()(output_right)
 
 output = concatenate([output_left, output_right])
 
@@ -154,3 +158,5 @@ macroF1 = f1Sum / float(f1Count)
 print "Non-other Macro-Averaged F1: %.4f\n" % (macroF1)
 
 print("\nResults stored in " + result_file)
+
+model.save_weights('model/HoboNet_%.4f_%.4f.model' %(acc, macroF1))
